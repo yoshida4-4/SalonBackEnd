@@ -167,8 +167,9 @@ return [
     | the cookie from being sent to you when it can't be done securely.
     |
     */
-
-    'secure' => env('SESSION_SECURE_COOKIE'),
+    
+    // 第二引数を追加、trueに設定
+    'secure' => env('SESSION_SECURE_COOKIE', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -196,7 +197,9 @@ return [
     |
     */
 
-    'same_site' => 'lax',
+    // 'same_site' => 'lax',
+    // 以下に変更
+    'same_site' => 'none',
 
     /*
     |--------------------------------------------------------------------------

@@ -4,6 +4,8 @@ use Laravel\Sanctum\Sanctum;
 
 return [
 
+    // 追加
+    'session' => true,
     /*
     |--------------------------------------------------------------------------
     | Stateful Domains
@@ -15,11 +17,14 @@ return [
     |
     */
 
-    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
-        '%s%s',
-        'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
-        Sanctum::currentApplicationUrlWithPort()
-    ))),
+    // 以下をコメントアウト&変更
+    // 'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
+    //     '%s%s',
+    //     'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
+    //     Sanctum::currentApplicationUrlWithPort()
+    // ))),
+    'stateful' => ['localhost:5173'],
+    // 'stateful' => ['http://localhost:5173'],
 
     /*
     |--------------------------------------------------------------------------
@@ -78,6 +83,12 @@ return [
         'authenticate_session' => Laravel\Sanctum\Http\Middleware\AuthenticateSession::class,
         'encrypt_cookies' => App\Http\Middleware\EncryptCookies::class,
         'verify_csrf_token' => App\Http\Middleware\VerifyCsrfToken::class,
+        // 追加
+        'api' => [
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            'throttle:api',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ],
     ],
 
 ];

@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ReserveController;
 use App\Http\Controllers\ReservationController;
 use App\Models\Reservation;
+use App\Http\Controllers\AuthenticatedSessionController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +25,35 @@ use App\Models\Reservation;
 
 Route::get('/books',[ReserveController::class,'index']);
 Route::get('/aaaa',[ReservationController::class,'index']);
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+// Route::post('/login', [AuthenticatedSessionController::class, 'login'])->middleware('web');
+Route::post('/login', [AuthenticatedSessionController::class, 'login']);
+
+// Route::post('/login', function (Request $request) {
+//     // バリデーション
+//     $credentials = $request->validate([
+//         'email' => 'required|email',
+//         'password' => 'required|string'
+//     ]);
+
+//     // 認証試行
+//     if (!Auth::attempt($credentials)) {
+//         throw ValidationException::withMessages([
+//             'email' => ['The provided credentials are incorrect.'],
+//         ]);
+//     }
+
+//     // ユーザー取得
+//     $user = Auth::user();
+
+//     // Sanctumトークンの発行 (API認証用)
+//     $token = $request->user()->createToken('auth-token')->plainTextToken;
+
+//     // レスポンスとしてトークンとユーザー情報を返す
+//     return response()->json([
+//         'user' => $user,
+//         'token' => $token,
+//     ]);
+// });
