@@ -23,8 +23,13 @@ return [
     //     'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
     //     Sanctum::currentApplicationUrlWithPort()
     // ))),
-    'stateful' => ['localhost:5173'],
+    // 'stateful' => ['localhost:5173'],
     // 'stateful' => ['http://localhost:5173'],
+    'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
+        '%s%s',
+        'localhost,localhost:5173,127.0.0.1,127.0.0.1:8000,::1',
+        Sanctum::currentApplicationUrlWithPort()
+    ))),
 
     /*
     |--------------------------------------------------------------------------
@@ -66,7 +71,9 @@ return [
     |
     */
 
-    'token_prefix' => env('SANCTUM_TOKEN_PREFIX', ''),
+    // 'token_prefix' => env('SANCTUM_TOKEN_PREFIX', ''),
+    // 以下に変更
+    'token_prefix' => '',
 
     /*
     |--------------------------------------------------------------------------

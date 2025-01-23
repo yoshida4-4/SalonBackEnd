@@ -28,8 +28,12 @@ Route::get('/aaaa',[ReservationController::class,'index']);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-// Route::post('/login', [AuthenticatedSessionController::class, 'login'])->middleware('web');
-Route::post('/login', [AuthenticatedSessionController::class, 'login']);
+
+Route::middleware(['web'])
+    ->group(function(){
+        Route::post('/login', [AuthenticatedSessionController::class, 'login']);
+    });
+// Route::post('/login', [AuthenticatedSessionController::class, 'login']);
 
 // Route::post('/login', function (Request $request) {
 //     // バリデーション

@@ -16,8 +16,9 @@ class AuthenticatedSessionController extends Controller
         ]);
 
         // 認証試行
-        if (Auth::attempt($request)) {
+        if (Auth::attempt($credentials)) {
             // 認証成功
+            $request->session()->regenerate();
             $user = Auth::user();
             return response()->json([
                 'message' => 'Login successful',
