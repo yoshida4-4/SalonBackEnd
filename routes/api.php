@@ -10,6 +10,7 @@ use App\Http\Controllers\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,13 @@ Route::middleware(['web'])
     ->group(function(){
         Route::post('/login', [AuthenticatedSessionController::class, 'login']);
     });
+
+// Route::group(['middleware' => 'api'], function(){
+//     Route::post('reserve', 'App\Http\Controllers\Api\PostController');
+// });
+
+Route::post('/reservations', [PostController::class, 'store']);
+
 // Route::post('/login', [AuthenticatedSessionController::class, 'login']);
 
 // Route::post('/login', function (Request $request) {
