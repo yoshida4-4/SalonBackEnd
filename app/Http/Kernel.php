@@ -21,6 +21,8 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        // 追加
+        \App\Http\Middleware\Cors::class,
     ];
 
     /**
@@ -44,8 +46,9 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            // 以下一行追加
+            // 以下二行追加
             \App\Http\Middleware\VerifyCsrfToken::class,
+            \App\Http\Middleware\Cors::class, 
         ],
     ];
 

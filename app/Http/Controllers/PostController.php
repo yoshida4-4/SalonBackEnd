@@ -19,12 +19,14 @@ class PostController extends Controller
         // $reservation->option_name = $request;
         // $reservation->save();
 
+        $reserve = $request['selectedService'];
+
         \App\Models\Reservation::create([
-            'user_id' => $request['user_id'],
-            'stylist_id' => $request['stylist_id'],
-            'service_id' => $request['service_id'],
-            'date' => $request['date'],
-            'start_flame' => $request['start_flame'],
+            'user_id' => $reserve['user_id'],
+            'stylist_id' => $reserve['stylist_id'],
+            'service_id' => $reserve['service_id'],
+            'date' => $reserve['date'],
+            'start_flame' => $reserve['start_flame'],
         ]);
 
         return response()->json([

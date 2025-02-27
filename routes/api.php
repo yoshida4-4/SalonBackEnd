@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/reservations', [PostController::class, 'store']);
 Route::middleware(['web'])
     ->group(function(){
         Route::post('/login', [AuthenticatedSessionController::class, 'login']);
@@ -39,7 +40,6 @@ Route::middleware(['web'])
 //     Route::post('reserve', 'App\Http\Controllers\Api\PostController');
 // });
 
-Route::post('/reservations', [PostController::class, 'store']);
 
 // Route::post('/login', [AuthenticatedSessionController::class, 'login']);
 
